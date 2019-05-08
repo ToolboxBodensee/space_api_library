@@ -17,7 +17,7 @@ signed int spaceAPI::detail::getSpaceStatus(String payload) {
 	signed int return_val = -1;
 	if (!json) return return_val;
 
-	cJSON *spaceState = cJSON_GetObjectItemCaseSensitive(json, "state")
+	cJSON *spaceState = cJSON_GetObjectItemCaseSensitive(json, "state");
 	cJSON *spaceOpen = cJSON_GetObjectItemCaseSensitive(spaceState, "open");
 
 	if (cJSON_IsBool(spaceOpen))
