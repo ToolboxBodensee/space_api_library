@@ -7,13 +7,13 @@
 namespace spaceAPI {
 	namespace detail {
 		const char* space_api_url = "https://bodensee.space/spaceapi/toolboxbodenseeev.json";
-		signed int getSpaceStatus(String payload);
+		signed int getSpaceStatus(const char* payload);
 	}
 	signed int is_open();
 }
 
-signed int spaceAPI::detail::getSpaceStatus(String payload) {
-	cJSON *json = cJSON_Parse(payload.c_str());
+signed int spaceAPI::detail::getSpaceStatus(const char* payload) {
+	cJSON *json = cJSON_Parse(payload);
 	signed int return_val = -1;
 	if (!json) return return_val;
 
@@ -41,7 +41,7 @@ signed int spaceAPI::is_open() {
 		int httpCode = http.GET();
 		if (httpCode == HTTP_CODE_OK) {
 			String payload = http.getString();
-			spaceStatus = detail::getSpaceStatus(payload);
+			spaceStatus = detail::getSpaceStatus(payload.c_str());
 		}
 		http.end();
 	}
