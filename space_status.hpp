@@ -7,14 +7,14 @@
 namespace spaceAPI {
 	namespace detail {
 		const char* space_api_url = "https://bodensee.space/spaceapi/toolboxbodenseeev.json";
-		signed int getSpaceStatus(const char* payload);
+		int8_t getSpaceStatus(const char* payload);
 	}
-	signed int is_open();
+	int8_t is_open();
 }
 
-signed int spaceAPI::detail::getSpaceStatus(const char* payload) {
+int8_t spaceAPI::detail::getSpaceStatus(const char* payload) {
 	cJSON *json = cJSON_Parse(payload);
-	signed int return_val = -1;
+	int8_t return_val = -1;
 	if (!json) return return_val;
 
 	cJSON *spaceState = cJSON_GetObjectItemCaseSensitive(json, "state");
@@ -32,8 +32,8 @@ signed int spaceAPI::detail::getSpaceStatus(const char* payload) {
 	return return_val;
 }
 
-signed int spaceAPI::is_open() {
-	signed int spaceStatus = -1;
+int8_t spaceAPI::is_open() {
+	int8_t spaceStatus = -1;
 	if (WiFi.status() = WL_CONNECTED)
 	{
 		HTTPClient http;
@@ -47,5 +47,4 @@ signed int spaceAPI::is_open() {
 	}
 	return spaceStatus;
 }
-
 #endif /* SPACE_API */
